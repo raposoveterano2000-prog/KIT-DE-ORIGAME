@@ -1,0 +1,964 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+/* Variáveis de Cores */
+:root {
+    --primary-blue: #A7D9E0; /* Azul claro suave */
+    --primary-green: #B2D8BB; /* Verde menta suave */
+    --primary-yellow: #FDD87F; /* Amarelo suave */
+    --neutral-white: #FFFFFF;
+    --neutral-light-gray: #F8F8F8;
+    --neutral-medium-gray: #ECECEC;
+    --neutral-dark-gray: #555555;
+    --text-color: #333333;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-color);
+    background-color: var(--neutral-light-gray);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Container de Conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Títulos Globais */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    border: none;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.btn.primary {
+    background-color: var(--primary-blue);
+    color: var(--neutral-white);
+}
+
+.btn.primary:hover {
+    background-color: #8accd3; /* Tom ligeiramente mais escuro */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.btn.secondary {
+    background-color: var(--primary-green);
+    color: var(--neutral-white);
+}
+
+.btn.secondary:hover {
+    background-color: #9bd7a5; /* Tom ligeiramente mais escuro */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.btn.big-btn {
+    padding: 18px 35px;
+    font-size: 1.3em;
+}
+
+/* Efeito de Dobra nos Botões */
+.fold-effect {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.fold-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2); /* Sutil para o efeito de "papel" */
+    transform: perspective(1000px) rotateX(0deg);
+    transform-origin: top;
+    transition: transform 0.4s ease-out;
+    z-index: -1;
+}
+
+.fold-effect:hover::before {
+    transform: perspective(1000px) rotateX(20deg); /* Efeito de dobra sutil */
+    opacity: 0; /* Desaparece para revelar o botão "dobrado" */
+}
+
+
+/* Header */
+header {
+    background-color: var(--neutral-white);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.logo span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.6em;
+    color: var(--text-color);
+}
+
+.desktop-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.desktop-menu a {
+    text-decoration: none;
+    color: var(--neutral-dark-gray);
+    font-weight: 500;
+    font-size: 1.05em;
+    transition: color 0.3s ease;
+}
+
+.desktop-menu a:hover {
+    color: var(--primary-blue);
+}
+
+.desktop-menu .btn.primary {
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+.hamburger-menu {
+    display: none; /* Escondido por padrão, visível no mobile */
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.mobile-menu {
+    display: none; /* Escondido por padrão */
+    background-color: var(--neutral-white);
+    position: absolute;
+    top: 70px; /* Ajustar conforme a altura do header */
+    left: 0;
+    width: 100%;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    z-index: 999;
+    padding: 20px 0;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+.mobile-menu.open {
+    display: block;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    text-align: center;
+}
+
+.mobile-menu li {
+    margin-bottom: 15px;
+}
+
+.mobile-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1em;
+    display: block;
+    padding: 10px 0;
+}
+
+.mobile-menu a.btn.primary {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+    color: var(--neutral-white);
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before { /* Camada de sobreposição sutil para o fundo */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/digitalproducts23/kit-origami-images/main/paper-texture.png') repeat; /* Adicione uma textura de papel sutil */
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.hero-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    color: var(--neutral-white);
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 450px;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Elementos de fundo de origami flutuantes */
+.origami-bg-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.bg-shape {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    transform-origin: center;
+    animation: bgFloat 15s infinite ease-in-out alternate;
+}
+
+.shape-1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 5%;
+    transform: rotate(30deg);
+}
+.shape-2 {
+    width: 80px;
+    height: 80px;
+    bottom: 15%;
+    right: 8%;
+    transform: rotate(-45deg);
+    animation-delay: 2s;
+}
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    top: 30%;
+    right: 15%;
+    transform: rotate(60deg);
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes bgFloat {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+    33% { transform: translate(20px, 30px) rotate(10deg); opacity: 0.2; }
+    66% { transform: translate(-10px, -20px) rotate(-5deg); opacity: 0.1; }
+    100% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+}
+
+
+/* Seções Gerais */
+section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+section:nth-of-type(even) {
+    background-color: var(--neutral-medium-gray);
+}
+
+/* About Section */
+.about-section .container {
+    text-align: center;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.about-image {
+    flex: 1;
+    max-width: 400px;
+    min-width: 300px; /* Para mobile */
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+}
+
+.about-text {
+    flex: 2;
+}
+
+.about-text h3 {
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.about-text ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.about-text ul li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.15em;
+    margin-bottom: 15px;
+    color: var(--neutral-dark-gray);
+}
+
+.about-text ul li i {
+    color: var(--primary-blue);
+    font-size: 1.4em;
+    min-width: 30px; /* Garante alinhamento */
+}
+
+/* Benefits Section */
+.benefits-section {
+    background: linear-gradient(to bottom right, var(--neutral-white), var(--neutral-medium-gray));
+    padding: 100px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.benefit-item {
+    background-color: var(--neutral-white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.benefit-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px var(--shadow-medium);
+}
+
+.benefit-item i {
+    font-size: 3.5em;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.benefit-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.benefit-item p {
+    color: var(--neutral-dark-gray);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background-color: var(--primary-yellow);
+    background-image: url('https://raw.githubusercontent.com/digitalproducts23/kit-origami-images/main/origami-pattern.png'); /* Padrão de origamis de fundo */
+    background-size: cover;
+    background-blend-mode: multiply;
+    padding: 100px 0;
+    color: var(--text-color);
+}
+
+.testimonials-section h2 {
+    color: var(--neutral-dark-gray);
+}
+
+.testimonials-section h2::after {
+    background-color: var(--neutral-dark-gray);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.testimonial-item {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-item p {
+    font-style: italic;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: var(--neutral-dark-gray);
+}
+
+.testimonial-item .author {
+    font-weight: 600;
+    color: var(--primary-blue);
+    display: block;
+    margin-top: 10px;
+}
+
+/* Free Test Section & Buy Now Section */
+.free-test-section, .buy-now-section {
+    background-color: var(--neutral-light-gray);
+    padding: 100px 0;
+    text-align: center;
+}
+
+.free-test-section .subtitle,
+.buy-now-section p {
+    font-size: 1.3em;
+    color: var(--neutral-dark-gray);
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+footer {
+    background-color: var(--text-color);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.95em;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer .social-links a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: var(--primary-yellow);
+}
+
+.copyright {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Chatbot */
+.chatbot-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.chatbot-toggle {
+    background-color: var(--primary-blue);
+    color: var(--neutral-white);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px var(--shadow-medium);
+    transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+    background-color: #8accd3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.chatbot-box {
+    background-color: var(--neutral-white);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px var(--shadow-medium);
+    width: 350px;
+    height: 450px;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0); /* Escondido por padrão */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.chatbot-box.open {
+    transform: scale(1);
+}
+
+.chatbot-header {
+    background-color: var(--primary-blue);
+    color: var(--neutral-white);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    color: var(--neutral-white);
+    font-size: 1.2em;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: var(--neutral-white);
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--neutral-light-gray);
+    border-bottom: 1px solid var(--neutral-medium-gray);
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    line-height: 1.4;
+    font-size: 0.95em;
+    word-wrap: break-word; /* Garante quebras de linha em palavras longas */
+}
+
+.message.bot-message {
+    background-color: var(--primary-green);
+    color: var(--neutral-white);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.message.user-message {
+    background-color: var(--neutral-medium-gray);
+    color: var(--text-color);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.chatbot-input {
+    padding: 15px;
+    background-color: var(--neutral-white);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.chatbot-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.chatbot-option-btn {
+    background-color: var(--neutral-medium-gray);
+    color: var(--text-color);
+    border: 1px solid var(--neutral-medium-gray);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chatbot-option-btn:hover {
+    background-color: var(--primary-yellow);
+    border-color: var(--primary-yellow);
+    color: var(--neutral-white);
+    transform: translateY(-2px);
+}
+
+/* Floating Buy Button */
+.floating-buy-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 990;
+    display: none; /* Escondido por padrão, aparece com scroll */
+    padding: 15px 25px;
+    font-size: 1.2em;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    border-radius: 50px;
+}
+
+.floating-buy-btn.show {
+    display: inline-flex;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animações de scroll (animate-on-scroll) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animações iniciais da Hero Section */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.fade-in.delay-1 { animation-delay: 0.3s; }
+.fade-in.delay-2 { animation-delay: 0.6s; }
+.fade-in.delay-3 { animation-delay: 0.9s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .desktop-menu {
+        display: none;
+    }
+    .hamburger-menu {
+        display: block;
+    }
+    .hero-section .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-content {
+        max-width: 100%;
+    }
+    .hero-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+    .hero-content p {
+        font-size: 1.1em;
+        margin-bottom: 30px;
+    }
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .hero-image {
+        margin-top: 40px;
+        max-width: 300px;
+    }
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-image {
+        max-width: 80%;
+    }
+    .about-text h3 {
+        margin-top: 30px;
+        font-size: 1.7em;
+    }
+    .about-text ul {
+        padding-left: 0;
+    }
+    .about-text ul li {
+        justify-content: center;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    .benefit-item {
+        padding: 25px;
+    }
+    .chatbot-box {
+        width: 300px;
+        right: 15px;
+        bottom: 80px;
+    }
+    .chatbot-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    .floating-buy-btn {
+        left: 20px;
+        bottom: 20px;
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em;
+    }
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+    .btn {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    .btn.big-btn {
+        padding: 15px 25px;
+        font-size: 1.1em;
+    }
+    section {
+        padding: 60px 0;
+    }
+    .hero-section {
+        padding: 80px 0;
+    }
+    .about-content, .benefits-grid, .testimonial-grid {
+        margin-top: 30px;
+    }
+    .chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+    }
+    .chatbot-box {
+        height: 400px;
+        width: 90vw; /* Ocupa 90% da largura da tela */
+        max-width: 320px; /* Limita largura máxima */
+    }
+    .chatbot-messages {
+        padding: 15px;
+    }
+    .chatbot-input {
+        padding: 10px;
+    }
+    .chatbot-option-btn {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo span {
+        font-size: 1.4em;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn {
+        width: 100%;
+    }
+    .about-image {
+        max-width: 100%;
+    }
+    .about-text ul li {
+        font-size: 1em;
+    }
+    .free-test-section .subtitle,
+    .buy-now-section p {
+        font-size: 1.1em;
+    }
+    footer .social-links a {
+        font-size: 1.3em;
+    }
+}
